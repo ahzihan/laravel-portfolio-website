@@ -8,104 +8,24 @@
 <table id="VisitorDt" class="table table-striped table-sm table-bordered" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th class="th-sm">NO</th>
+      <th class="th-sm">ID</th>
 	  <th class="th-sm">IP</th>
 	  <th class="th-sm">Date & Time</th>
     </tr>
   </thead>
   <tbody>
+	@forelse($data as $d)
     <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
+      <th class="th-sm">{{$d->id}}</th>
+	  <th class="th-sm">{{$d->ip_address}}</th>
+	  <th class="th-sm">{{$d->visit_time}}</th>
     </tr>
+	@empty
     <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
+      <td colspan="3" class="th-sm">No Items Found!!!</td>
     </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>	
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>	
-	
-    <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-    <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>	
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-
-    <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-    <tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>	
-	<tr>
-      <th class="th-sm">01</th>
-	  <th class="th-sm">127.0.0.1</th>
-	  <th class="th-sm">2020-04-14 04:02:06am</th>
-    </tr>	
+	@endforelse
+		
   </tbody>
 </table>
 
