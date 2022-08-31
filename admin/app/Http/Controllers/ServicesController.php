@@ -7,16 +7,16 @@ use App\Models\ServicesModel;
 
 class ServicesController extends Controller
 {
-    public function ServicesIndex(){
+    function ServicesIndex(){
         return view('Services');
     }
 
-    public function getServices(){
+    function getServices(){
         $services=ServicesModel::all();
         return $services;
     }
 
-    public function deleteService(Request $req){
+    function deleteService(Request $req){
         $id = $req->input('id');
         $result=ServicesModel::where('id',$id)->delete();
 
@@ -26,4 +26,28 @@ class ServicesController extends Controller
             return 0;
         }
     }
+
+    function getServiceById(Request $req){
+        $id = $req->input('id');
+        $result=ServicesModel::where('id',$id)->get();
+
+        return $result;
+    }
+
+    function ServiceUpdate(Request $req){
+        var_dump($req);
+     $id= $req->input('id');
+     $name= $req->input('name');
+     $des= $req->input('des');
+     $img= $req->input('img');
+     $result= ServicesModel::where('id','=',$id)->update(['service_name'=>$name,'service_des'=>$des,'service_img'=>$img]);
+
+     if($result==true){      
+       return 1;
+     }
+     else{
+      return 0;
+     }
+}
+
 }
