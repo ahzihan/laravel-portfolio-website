@@ -8,10 +8,10 @@
   <thead>
     <tr>
       <th class="th-sm">Image</th>
-	  <th class="th-sm">Name</th>
-	  <th class="th-sm">Description</th>
-	  <th class="th-sm">Edit</th>
-	  <th class="th-sm">Delete</th>
+      <th class="th-sm">Name</th>
+      <th class="th-sm">Description</th>
+      <th class="th-sm">Edit</th>
+      <th class="th-sm">Delete</th>
     </tr>
   </thead>
   <tbody id="services_table">
@@ -51,6 +51,7 @@
       <div class="modal-body text-center p-3 mt-3">
         <h5>Are you sure?</h5>
         <h6>You want to delete.</h6>
+        <h5 id="serviceDeleteId"></h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">No</button>
@@ -66,13 +67,13 @@
     <div class="modal-content">
       <div class="modal-body text-center p-3 mt-3">
         <h3 class="text-center">Service Update Form</h3>
-        <div id="serviceUpdateForm" class="d-none">
-          <h5></h5>
-          <input type="text" id="serviceName" name="service_name" class="form-control mb-4" placeholder="Service Name">
-          <div class="form-group">
-              <textarea class="form-control rounded-0" id="serviceDes" name="service_des" rows="3" placeholder="Description"></textarea>
-          </div>
-          <input type="text" id="serviceImg" name="service_img" class="form-control mb-4" placeholder="Image Link">
+        <h5 class="text-center" id="serviceEditId"></h5>
+          <div id="serviceUpdateForm" class="d-none">
+            <input type="text" id="serviceName" class="form-control mb-4" placeholder="Service Name">
+            <div class="form-group">
+                <textarea class="form-control rounded-0" id="serviceDes" rows="3" placeholder="Description"></textarea>
+            </div>
+            <input type="text" id="serviceImg" class="form-control mb-4" placeholder="Image Link">
           </div>
         </div>
         
@@ -81,7 +82,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Cancel</button>
-        <button id="confirmUpdateBtn" data-id="" type="button" class="btn btn-sm btn-info">Update</button>
+        <button id="confirmUpdateBtn" type="button" class="btn btn-sm btn-info">Update</button>
       </div>
     </div>
   </div>
