@@ -21,6 +21,5 @@
             </div>
         </div>
         @endforelse
-        
     </div>
 </div>

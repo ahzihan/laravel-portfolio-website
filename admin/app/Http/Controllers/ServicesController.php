@@ -35,6 +35,7 @@ class ServicesController extends Controller
     }
 
     function ServiceUpdate(Request $req){
+        var_dump($req);
      $id= $req->input('id');
      $name= $req->input('name');
      $des= $req->input('des');
