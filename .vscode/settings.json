@@ -1,0 +1,7 @@
+{
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true,
+    "html.format.wrapAttributes": "force",
+    "editor.defaultFormatter": "HookyQR.beautify",
+    "html.format.indentInnerHtml": true
+}

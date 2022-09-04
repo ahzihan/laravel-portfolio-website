@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\VisitorModel;
 use App\Models\ServicesModel;
 use App\Models\Course;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,8 @@ class HomeController extends Controller
         VisitorModel::insert(['ip_address'=>$userIP,'visit_time'=>$timeDate]);
 
         $services=ServicesModel::all();
+        $projects=Project::all();
         $data=Course::all();
-        return view('Home',compact('services','data'));
+        return view('Home',compact('services','data', 'projects'));
     }
 }

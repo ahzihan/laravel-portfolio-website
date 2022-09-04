@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ProjectController;
 
 
 
@@ -24,3 +25,7 @@ Route::post('/store', [CourseController::class,'store']);
 Route::get('/edit/{id}', [CourseController::class,'edit']);
 Route::post('/update', [CourseController::class,'update']);
 Route::get('/destroy/{id}', [CourseController::class,'destroy']);
+
+//Rest full 
+
+Route::resource('project', ProjectController::class);
