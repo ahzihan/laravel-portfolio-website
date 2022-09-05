@@ -70,6 +70,9 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Project::where('id',$id)->delete();
+        $project=Project::findOrFail($id);
+        $project->delete();
+        return redirect('project')->with('success','Data Deleted successfully.');
     }
 }

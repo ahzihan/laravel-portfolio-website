@@ -13,8 +13,7 @@
         <th class="th-sm">Image</th>
         <th class="th-sm">Project Title</th>
 	    <th class="th-sm">Project Description</th>
-        <th class="th-sm">Edit</th>
-        <th class="th-sm">Delete</th>
+        <th class="th-sm">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -23,8 +22,14 @@
       <th class="th-sm">{{$d->project_img}}</th>
 	  <th class="th-sm">{{$d->project_name}}</th>
 	  <th class="th-sm">{{$d->project_des}}</th>
-	  <th class="th-sm"><a href="{{url('/project/'.$d->id.'/edit')}}"><i class="fas fa-edit"></i></a></th>
-	  <th class="th-sm"><a onclick="return confirm('Are you Sure?')" href="{{url('/project/'.$d->id.'/delete')}}"><i class="fas fa-trash-alt"></i></a></th>
+	  <th class="th-sm d-flex">
+      <button class="btn btn-info btn-sm"><a href="{{url('/project/'.$d->id.'/edit')}}"><i class="fas fa-edit"></i></a></button>
+      <form action="{{ url('/project/'.$d->id) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        @csrf
+        <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+      </form>
+      </th>
     </tr>
 	@empty
     <tr>
