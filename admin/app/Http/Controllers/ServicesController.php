@@ -12,7 +12,7 @@ class ServicesController extends Controller
     }
 
     function getServices(){
-        $services=ServicesModel::all();
+        $services=ServicesModel::orderBy('id','desc')->get();
         return $services;
     }
 
@@ -34,8 +34,8 @@ class ServicesController extends Controller
         return $result;
     }
 
-    function ServiceUpdate(Request $req){
-        var_dump($req);
+    function update(Request $req){
+        dd($req->all());
      $id= $req->input('id');
      $name= $req->input('name');
      $des= $req->input('des');

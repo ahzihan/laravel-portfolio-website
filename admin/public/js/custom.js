@@ -6,47 +6,56 @@ $( document ).ready( function () {
 
 //For Services Table
 function getServicesData() {
-    axios.get( '/getServices' ).then( ( response ) => {
+    axios.get( '/getServices' )
+        .then( ( response ) => {
 
-        if ( response.status === 200 ) {
-            $( '#main-div' ).removeClass( 'd-none' );
-            $( '#loading' ).addClass( 'd-none' );
-            $( "#services_table" ).empty();
-            const jsonData = response.data;
-            $.each( jsonData, ( i, item ) => {
-                $( "<tr>" ).html( `
+            if ( response.status == 200 ) {
+                $( '#main-div' ).removeClass( 'd-none' );
+                $( '#loading' ).addClass( 'd-none' );
+
+                $( '#serviceDataTable' ).DataTable().destroy();
+                $( "#services_table" ).empty();
+
+                const jsonData = response.data;
+
+                $.each( jsonData, function ( i, item ) {
+                    $( "<tr>" ).html( `
             <td class="th-sm"><img class="table-img" src="${ jsonData[ i ].service_img }"></td>
             <td class="th-sm">${ jsonData[ i ].service_name }</td>
 	        <td class="th-sm">${ jsonData[ i ].service_des }</td>
             <th class="th-sm"><a class="editBtn" data-id="${ jsonData[ i ].id }" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></a></th>
 	        <th class="th-sm"><a class="deleteBtn" data-id="${ jsonData[ i ].id }" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></a></th>
             `).appendTo( "#services_table" );
-            } );
+                } );
 
-            //Services Table delete icon click
-            $( '.deleteBtn' ).click( function () {
-                const id = $( this ).data( 'id' );
-                $( "#serviceDeleteId" ).html( id );
-                $( "#deleteModal" ).modal( 'show' );
-            } );
+                //Services Table delete icon click
+                $( '.deleteBtn' ).click( function () {
+                    const id = $( this ).data( 'id' );
+                    $( "#serviceDeleteId" ).html( id );
+                    $( "#deleteModal" ).modal( 'show' );
+                } );
 
-            //Services Edit icon click
-            $( '.editBtn' ).click( function () {
-                const id = $( this ).data( 'id' );
-                $( "#serviceEditId" ).html( id );
-                serviceUpdate( id );
-                $( "#editModal" ).modal( "show" );
-            } );
+                //Services Edit icon click
+                $( '.editBtn' ).click( function () {
+                    const id = $( this ).data( 'id' );
+                    $( "#serviceEditId" ).html( id );
+                    serviceUpdate( id );
+                    $( "#editModal" ).modal( "show" );
+                } );
 
-        } else {
+                $( '#serviceDataTable' ).DataTable( { "order": false } );
+                $( '.dataTables_length' ).addClass( 'bs-select' );
+
+            } else {
+                $( '#loading' ).addClass( 'd-none' );
+                $( '#no_item' ).removeClass( 'd-none' );
+            }
+
+        } )
+        .catch( ( error ) => {
             $( '#loading' ).addClass( 'd-none' );
             $( '#no_item' ).removeClass( 'd-none' );
-        }
-
-    } ).catch( ( error ) => {
-        $( '#loading' ).addClass( 'd-none' );
-        $( '#no_item' ).removeClass( 'd-none' );
-    } );
+        } );
 }
 
 //Service delete confirm btn
@@ -59,18 +68,20 @@ $( '#confirmDelete' ).click( function () {
 function serviceDelete( deleteBtn ) {
     $( "#confirmDelete" )
         .html( `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden"></span>` );
+
     axios.post( '/deleteService', {
         id: deleteBtn
     } )
         .then( ( response ) => {
             $( "#confirmDelete" ).html( 'Yes' );
+
             if ( response.data == 1 ) {
                 $( '#deleteModal' ).modal( 'hide' );
                 toastr.success( 'Deleted Successfully.' );
                 getServicesData();
             } else {
                 $( '#deleteModal' ).modal( 'hide' );
-                toastr.error( 'Don`t Delete, Something ware wrong!' );
+                toastr.error( 'Fail To Delete!' );
                 getServicesData();
             }
         } )
@@ -87,10 +98,11 @@ function serviceUpdate( editId ) {
     } )
         .then( ( response ) => {
             if ( response.status == 200 ) {
-                const value = response.data;
 
                 $( "#serviceUpdateForm" ).removeClass( "d-none" );
                 $( "#serviceEditLoading" ).addClass( "d-none" );
+
+                const value = response.data;
 
                 $( "#serviceName" ).val( value[ 0 ].service_name );
                 $( "#serviceDes" ).val( value[ 0 ].service_des );
@@ -106,48 +118,57 @@ function serviceUpdate( editId ) {
         } );
 }
 
-//Service update confirm btn
+// Services Edit Modal Save Btn
 $( '#confirmUpdateBtn' ).click( function () {
     const id = $( "#serviceEditId" ).html();
     const name = $( "#serviceName" ).val();
     const des = $( "#serviceDes" ).val();
     const img = $( "#serviceImg" ).val();
-
     InsertUpdatedData( id, name, des, img );
 } );
 
 //Service Data Updated
 function InsertUpdatedData( serviceId, serviceName, serviceDes, serviceImg ) {
     //console.log( serviceId, serviceName, serviceDes, serviceImg );
-    $( "#confirmUpdateBtn" ).html(
-        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden"></span>`
-    );
-    axios.post( "/serviceUpdate", {
-        id: serviceId,
-        name: serviceName,
-        des: serviceDes,
-        img: serviceImg,
-    } )
-        .then( ( response ) => {
-            $( "#confirmUpdateBtn" ).html( 'Update' );
-            if ( response.status == 200 ) {
-                if ( response.data == 1 ) {
-                    $( "#editModal" ).modal( "hide" );
-                    toastr.success( "Updated Successfully." );
-                    getServicesData();
+    if ( serviceName.length == 0 ) {
+        toastr.error( 'Service Name is Empty !' );
+    }
+    else if ( serviceDes.length == 0 ) {
+        toastr.error( 'Service Description is Empty !' );
+    }
+    else if ( serviceImg.length == 0 ) {
+        toastr.error( 'Service Image is Empty !' );
+    }
+    else {
+        $( "#confirmUpdateBtn" ).html(
+            `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden"></span>`
+        );
+        axios.post( "/update", {
+            id: serviceId,
+            name: serviceName,
+            des: serviceDes,
+            img: serviceImg,
+        } )
+            .then( ( response ) => {
+                $( "#confirmUpdateBtn" ).html( 'Update' );
+                if ( response.status == 200 ) {
+                    if ( response.data == 1 ) {
+                        $( "#editModal" ).modal( "hide" );
+                        toastr.success( "Updated Successfully." );
+                        getServicesData();
+                    } else {
+                        $( "#editModal" ).modal( "hide" );
+                        toastr.error( "Failed To Update!" );
+                        getServicesData();
+                    }
                 } else {
                     $( "#editModal" ).modal( "hide" );
-                    toastr.error( "Don`t Update, Something ware wrong!" );
-                    getServicesData();
+                    toastr.error( "Something went wrong!" );
                 }
-            } else {
+            } )
+            .catch( ( error ) => {
                 $( "#editModal" ).modal( "hide" );
-                toastr.error( "Something ware wrong!" );
-            }
-        } )
-        .catch( ( error ) => {
-            console.log( error.message );
-            $( "#editModal" ).modal( "hide" );
-            toastr.error( "Something ware wrong!" );
-        } );
+                toastr.error( "Something went wrong!" );
+            } );
+    }
 }

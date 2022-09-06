@@ -17,7 +17,7 @@ Route::get('/services', [ServicesController::class,'ServicesIndex']);
 Route::get('/getServices', [ServicesController::class,'getServices']);
 Route::post('/deleteService', [ServicesController::class,'deleteService']);
 Route::post('/getServiceById', [ServicesController::class,'getServiceById']);
-Route::post('/serviceUpdate', [ServicesController::class,'ServiceUpdate']);
+Route::post('/update', [ServicesController::class,'update']);
 
 Route::get('/courses', [CourseController::class,'index']);
 Route::get('/create', [CourseController::class,'create']);
@@ -29,3 +29,4 @@ Route::get('/destroy/{id}', [CourseController::class,'destroy']);
 //Rest full 
 
 Route::resource('project', ProjectController::class);
+
