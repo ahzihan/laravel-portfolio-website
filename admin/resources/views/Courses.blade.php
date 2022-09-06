@@ -12,7 +12,9 @@
     <tr>
         <th class="th-sm">Image</th>
         <th class="th-sm">Course Title</th>
-	    <th class="th-sm">Sub Title</th>
+	      <th class="th-sm">Description</th>
+	      <th class="th-sm">Fee</th>
+	      <th class="th-sm">Total Class</th>
         <th class="th-sm">Edit</th>
         <th class="th-sm">Delete</th>
     </tr>
@@ -21,14 +23,16 @@
 	@forelse($data as $d)
     <tr>
       <th class="th-sm">{{$d->course_img}}</th>
-	  <th class="th-sm">{{$d->course_title}}</th>
-	  <th class="th-sm">{{$d->course_sub_title}}</th>
-	  <th class="th-sm"><a href="{{url('/edit/'.$d->id)}}"><i class="fas fa-edit"></i></a></th>
-	  <th class="th-sm"><a onclick="return confirm('Are you Sure?')" href="{{url('/destroy/'.$d->id)}}"><i class="fas fa-trash-alt"></i></a></th>
+      <th class="th-sm">{{$d->course_title}}</th>
+      <th class="th-sm">{{$d->course_des}}</th>
+      <th class="th-sm">{{$d->course_fee}}</th>
+      <th class="th-sm">{{$d->total_class}}</th>
+      <th class="th-sm"><a href="{{url('/edit/'.$d->id)}}"><i class="fas fa-edit"></i></a></th>
+      <th class="th-sm"><a onclick="return confirm('Are you Sure?')" href="{{url('/destroy/'.$d->id)}}"><i class="fas fa-trash-alt"></i></a></th>
     </tr>
 	@empty
     <tr>
-      <td colspan="5" class="th-sm">No Items Found!!!</td>
+      <td colspan="7" class="th-sm text-center">No Items Found!!!</td>
     </tr>
 	@endforelse
   </tbody>

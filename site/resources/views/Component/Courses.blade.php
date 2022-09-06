@@ -8,7 +8,7 @@
                 <img src="{{$value->course_img}}" alt="Avatar" class="thumbnail-image ">
                 <div class="thumbnail-middle">
                     <h1 class="thumbnail-title"> {{$value->course_title}}</h1>
-                    <h1 class="thumbnail-subtitle">{{$value->course_sub_title}}</h1>
+                    <h1 class="thumbnail-subtitle">{{$value->course_des}}</h1>
                     <button class="normal-btn btn">শুরু করুন</button>
                 </div>
         </div>

@@ -48,25 +48,13 @@ class CourseController extends Controller
         return view('editCourse',compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $r)
     {
-        Course::where('id',$r->id)->update(array('course_title'=>$r->course_title,'course_img'=>$r->course_img,'course_sub_title'=>$r->course_sub_title,));
+        Course::where('id',$r->id)->update(array('course_title'=>$r->course_title,'course_img'=>$r->course_img,'course_fee'=>$r->course_fee,'course_fee'=>$r->course_des,'total_class'=>$r->total_class,'total_enroll'=>$r->total_enroll,'course_link'=>$r->course_link,));
         return redirect('courses')->with('success','Data updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         Course::where('id',$id)->delete();

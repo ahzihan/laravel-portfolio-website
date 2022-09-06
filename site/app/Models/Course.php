@@ -11,7 +11,11 @@ class Course extends Model
     protected $table = "courses";
     protected $fillable = [
         'course_title',
-        'course_sub_title',
+        'course_des',
+        'course_fee',
+        'total_enroll',
+        'total_class',
+        'course_link',
         'course_img'
     ];
 }

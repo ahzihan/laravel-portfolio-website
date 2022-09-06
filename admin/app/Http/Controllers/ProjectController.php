@@ -31,24 +31,11 @@ class ProjectController extends Controller
         Project::create($r->all());
         return redirect('project')->with('success','Data inserted successfully.');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data=Project::find($id);
@@ -62,12 +49,6 @@ class ProjectController extends Controller
         return redirect('project')->with('success','Data Updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         // Project::where('id',$id)->delete();
